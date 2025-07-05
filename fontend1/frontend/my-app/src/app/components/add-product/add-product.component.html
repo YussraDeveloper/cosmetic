@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center">{{ product.id ? 'Update' : 'Add' }} Product</h3>
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" [(ngModel)]="product.name" name="name" placeholder="Enter product name" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="description" [(ngModel)]="product.description" name="description" placeholder="Enter description"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" id="price" [(ngModel)]="product.price" name="price" placeholder="Enter price" step="0.01" required>
+            </div>
+            <div class="mb-3">
+              <label for="image_url" class="form-label">Image URL</label>
+              <input type="text" class="form-control" id="image_url" [(ngModel)]="product.image_url" name="image_url" placeholder="Enter image URL">
+            </div>
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <input type="text" class="form-control" id="category" [(ngModel)]="product.category" name="category" placeholder="Enter category">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">{{ product.id ? 'Update' : 'Add' }} Product</button>
+            <div class="alert alert-success mt-3" *ngIf="message && !error">{{ message }}</div>
+            <div class="alert alert-danger mt-3" *ngIf="message && error">{{ message }}</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <h2>Orders</h2>
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.order_id }}</td>
+            <td>{{ order.username }}</td>
+            <td>${{ order.total }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.time | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="orders.length === 0">
+            <td colspan="5" class="text-center">No orders found</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-danger mt-3" *ngIf="message && error">{{ message }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <h2>Products</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let product of products">
+      <div class="card mb-4">
+        <img *ngIf="product.image_url" [src]="product.image_url" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text"><strong>${{ product.price }}</strong> ({{ product.category }})</p>
+          <button *ngIf="isAdmin" class="btn btn-primary btn-sm me hint" (click)="editProduct(product.id)">Edit</button>
+          <button *ngIf="isAdmin" class="btn btn-danger btn-sm ms-2" (click)="deleteProduct(product.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-danger mt-3" *ngIf="message && error">{{ message }}</div>
+</div>

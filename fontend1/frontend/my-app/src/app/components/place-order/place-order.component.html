@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <h2>Place Order</h2>
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="product" class="form-label">Select Product</label>
+            <select class="form-control" id="product" [(ngModel)]="selectedProduct" name="product">
+              <option [ngValue]="null" disabled>Select a product</option>
+              <option *ngFor="let product of products" [ngValue]="product">{{ product.name }} - ${{ product.price }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" [(ngModel)]="order.quantity" name="quantity" placeholder="Enter quantity" min="1" required>
+          </div>
+          <button class="btn btn-primary" (click)="addToCart()" [disabled]="!selectedProduct || !order.quantity">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3>Cart</h3>
+  <div class="card">
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of cart">
+          <span>{{ item.product.name }} ({{ item.quantity }} x ${{ item.price / item.quantity }})</span>
+          <span><strong>${{ item.price }}</strong></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngIf="cart.length === 0">
+          <span>Cart is empty</span>
+        </li>
+      </ul>
+      <div class="card-footer">
+        <h5>Total: ${{ total.toFixed(2) }}</h5>
+        <button class="btn btn-success w-100" (click)="placeOrder()" [disabled]="cart.length === 0">Place Order</button>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-success mt-3" *ngIf="message && !error">{{ message }}</div>
+  <div class="alert alert-danger mt-3" *ngIf="message && error">{{ message }}</div>
+</div>
